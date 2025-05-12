@@ -1,18 +1,16 @@
 pipeline {
     agent any
-
     environment {
-        IMAGE_NAME = 'alexandracoder/alexandracoder-pipeline'  // Repositorio en Docker Hub
-        TAG = '20250512133511'  // Tag de la imagen, puede ser el timestamp o la versión
+        IMAGE_NAME = 'alexandracoder/alexandracoder-pipeline'
+        TAG = "20250512133511"
+        DOCKER_CREDENTIALS_ID = 'docker' // Asegúrate de usar el ID correcto aquí
     }
-
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-
         stage('Build Docker Image') {
             steps {
                 script {
@@ -21,34 +19,19 @@ pipeline {
                 }
             }
         }
-
-        stage('Run Container Locally') {
-            steps {
-                script {
-                    echo "Ejecutando el contenedor localmente en el puerto 8082..."
-                    sh '''
-                        docker rm -f toqueneldom || true
-                        docker run -d -p 8082:80 --name toqueneldom $IMAGE_NAME:latest
-                    '''
-                }
-            }
-        }
-
         stage('Tag Docker Image') {
             steps {
                 script {
-                    echo "Etiquetando la imagen Docker con un nuevo tag..."
-                    sh 'docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG'
+                    echo "Etiquetando la imagen Docker..."
+                    sh "docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG"
                 }
             }
         }
-
         stage('Push to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'DOCKER_CREDENTIALS_ID', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     script {
                         echo "Pusheando la imagen a Docker Hub..."
-                        // Inicia sesión en Docker Hub
                         sh '''
                             echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                             docker push $IMAGE_NAME:latest
@@ -61,3 +44,4 @@ pipeline {
         }
     }
 }
+
