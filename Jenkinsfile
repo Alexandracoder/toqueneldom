@@ -2,18 +2,14 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'alexandracoder'  // Cambia con tu nombre en Docker Hub
-        DOCKER_CREDENTIALS_ID = 'docker'     // Usamos la credencial de Docker Hub
-        GITHUB_CREDENTIALS_ID = 'Credencial-Git' // Usamos la credencial de GitHub
-        CONTAINER_NAME = 'toqueneldom'
-        LOCAL_PORT = '8082'                         // El puerto en el que corre la app localmente
+        IMAGE_NAME = 'alexandracoder/alexandracoder-pipeline'  // Repositorio en Docker Hub
+        TAG = '20250512133511'  // Tag de la imagen, puede ser el timestamp o la versión
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Cambia a la rama correcta 'main' en lugar de 'master'
-                git credentialsId: "${GITHUB_CREDENTIALS_ID}", branch: 'main', url: 'https://github.com/Alexandracoder/toqueneldom.git'
+                checkout scm
             }
         }
 
@@ -21,7 +17,6 @@ pipeline {
             steps {
                 script {
                     echo "Construyendo imagen Docker..."
-                    // Construye la imagen de Docker
                     sh 'docker build -t $IMAGE_NAME:latest .'
                 }
             }
@@ -30,11 +25,10 @@ pipeline {
         stage('Run Container Locally') {
             steps {
                 script {
-                    echo "Ejecutando el contenedor localmente en el puerto $LOCAL_PORT..."
-                    // Elimina el contenedor si ya está corriendo
+                    echo "Ejecutando el contenedor localmente en el puerto 8082..."
                     sh '''
-                        docker rm -f $CONTAINER_NAME || true
-                        docker run -d -p $LOCAL_PORT:80 --name $CONTAINER_NAME $IMAGE_NAME:latest
+                        docker rm -f toqueneldom || true
+                        docker run -d -p 8082:80 --name toqueneldom $IMAGE_NAME:latest
                     '''
                 }
             }
@@ -44,16 +38,14 @@ pipeline {
             steps {
                 script {
                     echo "Etiquetando la imagen Docker con un nuevo tag..."
-                    env.TAG = new Date().format("yyyyMMddHHmmss")  // Usando la fecha y hora como tag
-                    // Etiqueta la imagen Docker
-                    sh "docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG"
+                    sh 'docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG'
                 }
             }
         }
 
         stage('Push to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'DOCKER_CREDENTIALS_ID', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     script {
                         echo "Pusheando la imagen a Docker Hub..."
                         // Inicia sesión en Docker Hub
