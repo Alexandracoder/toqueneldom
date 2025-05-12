@@ -2,17 +2,17 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'alexandracoder'
-        DOCKER_CREDENTIALS_ID = 'dockerhub-creds'
-        GITHUB_CREDENTIALS_ID = 'Credencial-Git'
+        IMAGE_NAME = 'tuusuario/toqueneldom'  // Cambia con tu nombre en Docker Hub
+        DOCKER_CREDENTIALS_ID = 'docker'   // Usamos la credencial de Docker Hub
+        GITHUB_CREDENTIALS_ID = 'Credencial-Git' // Aquí utilizamos la credencial de GitHub
         CONTAINER_NAME = 'toqueneldom'
-        LOCAL_PORT = '8082'
+        LOCAL_PORT = '8082'                         // El puerto en el que corre la app localmente
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: "${GITHUB_CREDENTIALS_ID}", url: 'https://github.com/tuusuario/toqueneldom.git'
+                git credentialsId: "${GITHUB_CREDENTIALS_ID}", url: 'https://github.com/Alexandracoder/toqueneldom.git'
             }
         }
 
@@ -24,26 +24,25 @@ pipeline {
 
         stage('Run Container Locally') {
             steps {
-                sh """
+                sh '''
                     docker rm -f $CONTAINER_NAME || true
                     docker run -d -p $LOCAL_PORT:80 --name $CONTAINER_NAME $IMAGE_NAME:latest
-                """
+                '''
             }
         }
 
         stage('Tag Docker Image') {
             steps {
                 script {
-                    TAG = new Date().format("yyyyMMddHHmmss")
-                    env.TAG = TAG
+                    env.TAG = new Date().format("yyyyMMddHHmmss")
                     sh "docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG"
                 }
             }
         }
 
-        stage('Push to DockerHub') {
+        stage('Push to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
+                withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
                         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                         docker push $IMAGE_NAME:latest
@@ -55,3 +54,4 @@ pipeline {
         }
     }
 }
+
