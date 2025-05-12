@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'tuusuario/toqueneldom'  // Cambia con tu nombre en Docker Hub
+        IMAGE_NAME = 'alexandracoder'  // Cambia con tu nombre en Docker Hub
         DOCKER_CREDENTIALS_ID = 'docker'     // Usamos la credencial de Docker Hub
         GITHUB_CREDENTIALS_ID = 'Credencial-Git' // Usamos la credencial de GitHub
         CONTAINER_NAME = 'toqueneldom'
