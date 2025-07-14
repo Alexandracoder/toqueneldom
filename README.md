@@ -1,115 +1,119 @@
-<img src="assets/img/logo-blanca.png" alt="LetItBeat!">
+# 🎹 Toquen el DOM
 
-<h3>/// 1. Descripción del Proyecto</h3>
-<p>
-  Toquen el DOM es una aplicación web interactiva para una <strong>escuela de música online</strong> que permite a los usuarios practicar con <strong>instrumentos virtuales</strong> (Piano, Marimba y Batería) mediante interacción con teclado y mouse.
-</p>
-<p>
-  Este proyecto fue desarrollado como parte del <strong>Bootcamp P1 de FemCoders.</strong> (Proyecto ficticio de uso educacional)
-</p>
+<img src="assets/img/logo-blanca.png" alt="LetItBeat!" />
 
-<h3>/// 2. Características Principales:</h3>
-<ul>
-  <li><strong>Tres instrumentos</strong> con <strong>sonidos realistas</strong></li>
-  <li>Interacción dual <strong>(teclado físico + mouse)</strong></li>
-  <li><strong>Animaciones</strong> visuales al tocar</li>
-  <li>Diseño <strong>responsive</strong></li>
-  <li>Fácil despliegue con <strong>Docker</strong></li>
-</ul>
+## /// 1. Descripción del Proyecto
 
-<h3>/// 3. Contexto y Objetivos:</h3>
-<p>
-  <strong>Aplicar y consolidar</strong> nuestros conocimientos en tecnologías como JavaScript, Docker, HTML y CSS, con el objetivo de crear una herramienta innovadora que facilite el aprendizaje de la música en línea, <strong>sin importar la ubicación del estudiante.</strong>
-</p>
-<ul>
-  <li>➡️ Crear una plataforma interactiva para práctica musical</li>
-  <li>➡️ Implementar interacción mediante mouse y teclado</li>
-  <li>➡️ Evaluar diferentes propuestas de desarrollo</li>
-  <li>➡️ Cumplir con los requerimientos técnicos del bootcamp</li>
-</ul>
+Toquen el DOM es una aplicación web interactiva para una **escuela de música online** que permite a los usuarios practicar con **instrumentos virtuales** (Piano, Marimba y Batería) mediante interacción con teclado y mouse.
 
-<h3>/// 4. Requerimientos Técnicos</h3>
-<ul>
-  <li>✅ <strong>GitFlow</strong> para gestión de versiones</li>
-  <li>✅ Tres instrumentos: <strong>Piano, Marimba y Batería</strong></li>
-  <li>✅ Interacción con <strong>mouse y teclado</strong></li>
-  <li>✅ <strong>Sonidos realistas</strong> y sincronizados</li>
-  <li>✅ <strong>Animaciones</strong> al tocar</li>
-  <li>✅ Código <strong>limpio y semántico</strong> (HTML5, CSS3, JS Vanilla)</li>
-  <li>✅ <strong>Dockerfile</strong> para contenedorización</li>
-</ul>
+Este proyecto fue desarrollado como parte del **Bootcamp P1 de FemCoders**. (Proyecto ficticio de uso educacional)
 
-<p><strong>Bonus track</strong> 🌟</p>
-<ul>
-  <li>Diseño responsive</li>
-  <li>Documentación de uso</li>
-</ul>
+## /// 2. Características Principales
 
-<h3>/// 5. Vistas Principales:</h3>
+- **Tres instrumentos** con sonidos realistas.
+- Interacción dual **(teclado físico + mouse)**.
+- **Animaciones** visuales al tocar.
+- Diseño **responsive** con media queries.
+- Fácil despliegue en local con **Docker**.
 
-<h4>Vista de Piano 🎹</h4>
-<ul>
-  <li>2 Octavas <strong>completas</strong></li>
-  <li>Teclas blancas/negras correctamente <strong>afinadas</strong></li>
-  <li>Mapeo a <strong>teclado</strong> QWERTY</li>
-</ul>
+## /// 3. Contexto y Objetivos
 
-<h4>Vista de Marimba 🎵</h4>
-<ul>
-  <li>Barras <strong>organizadas</strong> por tonalidad</li>
-  <li>Sonidos percusivos <strong>realistas</strong></li>
-  <li>Visualización de <strong>notas activas</strong></li>
-</ul>
+**Aplicar y consolidar** conocimientos en JavaScript, HTML, CSS y Docker para crear una herramienta innovadora que facilite el aprendizaje musical en línea, sin importar la ubicación del estudiante.
 
-<h4>Vista de Batería 🥁</h4>
-<ul>
-  <li>Componentes <strong>interactivos</strong></li>
-  <li>Efectos <strong>visuales</strong> al tocar</li>
-</ul>
+- ➡️ Crear una plataforma interactiva para práctica musical.
+- ➡️ Implementar interacción mediante mouse y teclado.
+- ➡️ Implementar diseño adaptable (responsive).
+- ➡️ Practicar contenedorización con Docker.
 
-<h3>/// 6. Herramientas Utilizadas</h3>
-<ul>
-  <li>HTML5 semántico</li>
-  <li>CSS3</li>
-  <li>JavaScript vanilla</li>
-  <li>Docker</li>
-  <li>Git y GitHub</li>
-  <li>DevTools</li>
-  <li>Tone.js</li>
-  <li>Google Fonts y Font Awesome</li>
-  <li>Canva</li>
-</ul>
+## /// 4. Requerimientos Técnicos
 
-<h3>/// 8. Instalación</h3>
+- ✅ **GitFlow** para gestión de versiones.
+- ✅ Tres instrumentos: **Piano, Marimba y Batería**.
+- ✅ Interacción con **mouse y teclado**.
+- ✅ **Sonidos realistas** y sincronizados.
+- ✅ **Animaciones** al tocar.
+- ✅ Código **limpio y semántico** (HTML5, CSS3, JS Vanilla).
+- ✅ **Responsive** (media queries).
+- ✅ **Dockerfile** para contenedorización y despliegue local.
 
-<h4>Por el Dockerfile</h4>
-<p>En Docker, crea un archivo llamado <code>Dockerfile</code> con este contenido:</p>
-<pre><code>FROM nginx:alpine
-COPY . /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-</code></pre>
+**Bonus track 🌟**
 
-<p>Luego, en tu terminal, construye tu imagen:</p>
-<code>docker build -t toqueneldom .</code>
+- Documentación clara y detallada.
+- Preparado para futuros despliegues en servidor.
 
-<p>Y ejecuta el contenedor:</p>
-<code>docker run -p 8080:80 toqueneldom</code>
+## /// 5. Vistas Principales
 
-<p>Después, abre tu navegador en: <br><code>http://localhost:8080</code></p>
+### Piano 🎹
 
-<hr>
+- 2 octavas **completas**.
+- Teclas blancas/negras correctamente **afinadas**.
+- Mapeo a **teclado QWERTY**.
 
-<h4>📧 Hecho por:</h4>
-<ul>
-  <li>Murry Alexandra Rojas Castro</li>
-  <li>Bruna H. Sonda Santos</li>
-  <li>Débora Rubio</li>
-  <li>Mayleth Carrascal</li>
-</ul>
+### Marimba 🎵
 
-<p>📅 Fecha de entrega: 24/04</p>
+- Barras **organizadas** por tonalidad.
+- Sonidos percusivos **realistas**.
+- Visualización de **notas activas**.
 
-<p>🌐 <strong>Repositorio:</strong> <a href="https://github.com/debsrdev/toqueneldom">GitHub</a></p>
+### Batería 🥁
 
-<p>Gracias! ✨</p>
+- Componentes **interactivos**.
+- Efectos **visuales** al tocar.
+
+## /// 6. Herramientas Utilizadas
+
+- HTML5 semántico
+- CSS3 (con media queries)
+- JavaScript vanilla
+- Docker y NGINX (para despliegue local)
+- Git y GitHub
+- DevTools
+- Tone.js
+- Google Fonts y Font Awesome
+- Canva
+
+## /// 7. Instalación y Uso
+
+### ✅ Clonar el repositorio
+
+```bash
+git clone https://github.com/Alexandracoder/toqueneldom.git
+cd toqueneldom
+```
+
+### ✅ Ejecutar en local con Docker
+
+**Construir la imagen Docker:**
+
+```bash
+docker build -t toqueneldom-web .
+```
+
+**Ejecutar el contenedor:**
+
+```bash
+docker run -d -p 8080:80 --name toqueneldom-container toqueneldom-web
+```
+
+**Abrir en tu navegador:**
+
+```
+http://localhost:8080
+```
+
+### ⚡ Justificación del uso de Docker
+
+Aunque es un proyecto frontend estático, Docker se usa para garantizar que todos puedan verlo exactamente igual, practicar la contenedorización y simular un posible despliegue real en un servidor NGINX.
+
+## /// 8. Hecho por
+
+- Murry Alexandra Rojas Castro
+- Bruna H. Sonda Santos
+- Débora Rubio
+- Mayleth Carrascal
+
+📅 Fecha de entrega: 24/04
+
+🌐 **Repositorio:** [GitHub]https://github.com/Alexandracoder/toqueneldom.git)
+
+Gracias! ✨
